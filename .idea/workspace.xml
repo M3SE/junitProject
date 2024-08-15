@@ -52,6 +52,8 @@
   "keyToString": {
     "Application.Main.executor": "Run",
     "JUnit.BookServiceTest.executor": "Run",
+    "JUnit.BookServiceTest.testPurchaseBook_NullBook.executor": "Run",
+    "JUnit.BookServiceTest.testSearchBook_EdgeCase_EmptyKeyword.executor": "Run",
     "JUnit.UserServiceTest.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
@@ -68,6 +70,46 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="BookServiceTest.testPurchaseBook_NullBook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="JunitProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.BookServiceTest" />
+      <option name="METHOD_NAME" value="testPurchaseBook_NullBook" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookServiceTest.testSearchBook_EdgeCase_EmptyKeyword" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="JunitProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.BookServiceTest" />
+      <option name="METHOD_NAME" value="testSearchBook_EdgeCase_EmptyKeyword" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.BookServiceTest.testSearchBook_EdgeCase_EmptyKeyword" />
+        <item itemvalue="JUnit.BookServiceTest.testPurchaseBook_NullBook" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -85,11 +127,23 @@
       <option name="presentableId" value="Default" />
       <updated>1723732016547</updated>
       <workItem from="1723732018253" duration="1876000" />
-      <workItem from="1723733915934" duration="4021000" />
+      <workItem from="1723733915934" duration="4374000" />
+      <workItem from="1723754155748" duration="1130000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
