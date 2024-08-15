@@ -32,6 +32,8 @@ class BookServiceTest {
         System.out.println("Completed a test.");
     }
 
+    // Tests for searchBook
+
     @Test
     void testSearchBook_Success() {
         Book book1 = new Book("Effective Java", "Joshua Bloch", "Programming", 45.00);
@@ -52,13 +54,17 @@ class BookServiceTest {
 
     @Test
     void testSearchBook_EdgeCase_EmptyKeyword() {
-        Book book = new Book("Refactoring", "Martin Fowler", "Programming", 40.00);
-        bookService.addBook(book);
+        Book book1 = new Book("Refactoring", "Martin Fowler", "Programming", 40.00);
+        Book book2 = new Book("Clean Code", "Robert C. Martin", "Programming", 35.00);
+        bookService.addBook(book1);
+        bookService.addBook(book2);
 
         List<Book> results = bookService.searchBook("");
 
         assertEquals(1, results.size(), "Should return all books for an empty keyword.");
     }
+
+    // Tests for purchaseBook
 
     @Test
     void testPurchaseBook_Success() {
@@ -85,5 +91,90 @@ class BookServiceTest {
             bookService.purchaseBook(user, null);
         });
         assertEquals("Book cannot be null", exception.getMessage());
+    }
+
+    // Tests for addBookReview
+
+    @Test
+    void testAddBookReview_Success() {
+        Book book = new Book("Continuous Delivery", "Jez Humble", "DevOps", 45.00);
+        bookService.addBook(book);
+        user.getPurchasedBooks().add(book);
+
+        boolean result = bookService.addBookReview(user, book, "Great book on DevOps!");
+
+        assertTrue(result, "Review should be added successfully.");
+        assertEquals(1, book.getReviews().size(), "Book should have one review.");
+    }
+
+    @Test
+    void testAddBookReview_NotPurchased() {
+        Book book = new Book("Site Reliability Engineering", "Google SRE Team", "DevOps", 55.00);
+        bookService.addBook(book);
+
+        boolean result = bookService.addBookReview(user, book, "Insightful read!");
+
+        assertFalse(result, "Review should not be added if the user has not purchased the book.");
+        assertTrue(book.getReviews().isEmpty(), "Book should have no reviews.");
+    }
+
+    @Test
+    void testAddBookReview_NullReview() {
+        Book book = new Book("Accelerate", "Nicole Forsgren", "DevOps", 50.00);
+        bookService.addBook(book);
+        user.getPurchasedBooks().add(book);
+
+        Exception exception = assertThrows(NullPointerException.class, () -> {
+            bookService.addBookReview(user, book, null);
+        });
+        assertEquals("Review cannot be null", exception.getMessage());
+    }
+
+    // Tests for addBook
+
+    @Test
+    void testAddBook_Success() {
+        Book book = new Book("Test Driven Development", "Kent Beck", "Programming", 38.00);
+
+        boolean result = bookService.addBook(book);
+
+        assertTrue(result, "Book should be added successfully.");
+    }
+
+    @Test
+    void testAddBook_BookAlreadyExists() {
+        Book book = new Book("Extreme Programming Explained", "Kent Beck", "Agile", 36.00);
+        bookService.addBook(book);
+
+        boolean result = bookService.addBook(book);
+
+        assertFalse(result, "Book should not be added again if it already exists.");
+    }
+
+    @Test
+    void testAddBook_NullBook() {
+        Exception exception = assertThrows(NullPointerException.class, () -> {
+            bookService.addBook(null);
+        });
+        assertEquals("Book cannot be null", exception.getMessage());
+    }
+
+    @Test
+    void testRemoveBook_Success() {
+        Book book = new Book("Patterns of Enterprise Application Architecture", "Martin Fowler", "Software Engineering", 55.00);
+        bookService.addBook(book);
+
+        boolean result = bookService.removeBook(book);
+
+        assertTrue(result, "Book should be removed successfully.");
+    }
+
+    @Test
+    void testRemoveBook_BookNotInDatabase() {
+        Book book = new Book("Domain-Driven Design", "Eric Evans", "Software Architecture", 47.00);
+
+        boolean result = bookService.removeBook(book);
+
+        assertFalse(result, "Book removal should fail if the book does not exist.");
     }
 }
